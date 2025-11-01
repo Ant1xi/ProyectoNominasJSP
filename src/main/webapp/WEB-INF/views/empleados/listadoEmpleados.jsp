@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <title>Listado de empleados</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css">
-
 </head>
 <body>
 <header>
@@ -19,12 +18,12 @@
                 </form>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/views/sueldoEmpleadoDni.jsp">
+                <a href="${pageContext.request.contextPath}/WEB-INF/views/sueldoEmpleadoDni.jsp">
                     <button>Mostrar salario de un empleado</button>
                 </a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/views/modificarEmpleados.jsp">
+                <a href="${pageContext.request.contextPath}/WEB-INF/views/modificarEmpleados.jsp">
                     <button>Modificar empleado</button>
                 </a>
             </li>

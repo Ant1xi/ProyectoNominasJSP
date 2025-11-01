@@ -14,33 +14,31 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-
-@WebServlet("/empleados")
-public class EmpleadoServlet extends HttpServlet {
-
-    /**
-     *
-     * @param request   an {@link HttpServletRequest} object that
-     *                  contains the request the client has made
-     *                  of the servlet
-     *
-     * @param response  an {@link HttpServletResponse} object that
-     *                  contains the response the servlet sends
-     *                  to the client
-     *
-     * @throws ServletException
-     * @throws IOException
-     */
+@WebServlet("/empleados/*")
+public class EmpleadoController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = request.getPathInfo();
+        if (path == null || "/".equals(path)) {
+            listar(request, response);
+        } else if ("/buscar".equals(path)) {
+            //mostrarFormularioBusqueda(request, response);
+        } else if ("/editar".equals(path)) {
+            //mostrarFormularioEdicion(request, response);
+        } else {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
+
+    public void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             List<EmpleadoModelo> listaEmpleados = new EmpleadoDAO().getAll();
             request.setAttribute("empleadosRecogidos", listaEmpleados);
-
-            request.getRequestDispatcher("/views/listadoEmpleados.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/empleados/listadoEmpleados.jsp").forward(request, response);
 
         } catch (FormatoDniException | EmpleadoDataException | FormatoSexoException e) {
+            request.setAttribute("error", e.getMessage());
+            request.getRequestDispatcher("/views/error/error.jsp").forward(request, response);
             System.out.println("Error: " + e.getMessage());
         }
     }
 }
-

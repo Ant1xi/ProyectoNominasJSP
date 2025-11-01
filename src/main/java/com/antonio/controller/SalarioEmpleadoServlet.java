@@ -19,36 +19,11 @@ import java.util.List;
 
 @WebServlet("/salario")
 public class SalarioEmpleadoServlet extends HttpServlet {
-    /**
-     *
-     * @param request   an {@link HttpServletRequest} object that
-     *                  contains the request the client has made
-     *                  of the servlet
-     *
-     * @param response  an {@link HttpServletResponse} object that
-     *                  contains the response the servlet sends
-     *                  to the client
-     *
-     * @throws ServletException
-     * @throws IOException
-     */
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
-    /**
-     *
-     * @param request   an {@link HttpServletRequest} object that
-     *                  contains the request the client has made
-     *                  of the servlet
-     *
-     * @param response  an {@link HttpServletResponse} object that
-     *                  contains the response the servlet sends
-     *                  to the client
-     *
-     * @throws ServletException
-     * @throws IOException
-     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> errores = new ArrayList<>();
         String dni =  request.getParameter("dni");
@@ -85,11 +60,6 @@ public class SalarioEmpleadoServlet extends HttpServlet {
         request.getRequestDispatcher("views/sueldoEmpleadoDni.jsp").forward(request, response);
     }
 
-    /**
-     *
-     * @param dni
-     * @return
-     */
     private boolean comprobarDni(String dni) {
         return dni != null && !dni.trim().isBlank() && dni.matches("^[0-9]{7,8}[A-Z]$");
     }
