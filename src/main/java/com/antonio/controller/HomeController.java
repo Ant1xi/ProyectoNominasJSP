@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/")
+@WebServlet("/home")
 public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/home/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/home/home.jsp").forward(request, response);
     }
 }

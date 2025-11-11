@@ -5,64 +5,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Listado de empleados</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css">
+    <link rel="stylesheet" href="<c:url value='/css/styles.css'/>">
 </head>
 <body>
-<header>
-    <h1>Gestor de Nóminas</h1>
-    <nav>
-        <ul>
-            <li>
-                <form action="${pageContext.request.contextPath}/empleados" method="get">
-                    <button type="submit">Ver empleados</button>
-                </form>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/views/sueldoEmpleadoDni.jsp">
-                    <button>Mostrar salario de un empleado</button>
-                </a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/views/modificarEmpleados.jsp">
-                    <button>Modificar empleado</button>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
+    <%@ include file="/WEB-INF/views/fragmentos/header.jspf" %>
 
-<main>
-    <h2>Empleados</h2>
+    <section id="ver-empleados" class="panel">
+        <h2>Empleados</h2>
 
-    <section class="tabla-empleados">
-        <c:choose>
-            <c:when test="${empty empleadosRecogidos}">
-                <p class="sin-empleados">No hay empleados.</p>
-            </c:when>
-            <c:otherwise>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>DNI</th><th>Nombre</th><th>Sexo</th><th>Categoría</th><th>Años</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="e" items="${empleadosRecogidos}">
+        <section class="tabla-empleados">
+            <c:choose>
+                <c:when test="${empty empleadosRecogidos}">
+                    <p class="sin-empleados">No hay empleados.</p>
+                </c:when>
+                <c:otherwise>
+                    <table>
+                        <thead>
                         <tr>
-                            <td>${e.dni}</td>
-                            <td>${e.nombre}</td>
-                            <td>${e.sexo}</td>
-                            <td>${e.categoria}</td>
-                            <td>${e.anyos}</td>
+                            <th>DNI</th>
+                            <th>Nombre</th>
+                            <th>Sexo</th>
+                            <th>Categoría</th>
+                            <th>Años</th>
                         </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </c:otherwise>
-        </c:choose>
-    </section>
-</main>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="e"
+                                   items="${empleadosRecogidos}">
+                            <tr>
+                                <td>${e.dni}</td>
+                                <td>${e.nombre}</td>
+                                <td>${e.sexo}</td>
+                                <td>${e.categoria}</td>
+                                <td>${e.anyos}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </c:otherwise>
+            </c:choose>
+        </section>
 
-<p class="volver"><a href="${pageContext.request.contextPath}/">Volver</a></p>
+        <p class="volver"><a
+                href="javascript:history.back()">Volver</a></p>
+    </section>
 </body>
 </html>

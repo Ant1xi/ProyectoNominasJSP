@@ -1,0 +1,529 @@
+/* =========================================================
+   RESET + VARIABLES
+   ========================================================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root{
+    --primary-color: #151515;
+    --secondary-color: #232323; /* rgb(35,35,35) */
+    --accent-color: hsl(120, 100%, 75%);
+    --text-color: #e8e8e8;
+
+    /* Neutros y ayudas */
+    --muted: #bdbdbd;
+    --muted-2: #9a9a9a;
+    --border: #ffffff;
+    --danger: #ff4d4d;
+    --warning: #ff7b00;
+    --ok: #55ff9a;
+
+    /* Sombras y brillos */
+    --glow-red: rgba(255, 0, 0, .45);
+    --glow-orange: rgba(255, 119, 0, .45);
+    --glow-blue: rgba(0, 213, 255, .35);
+
+    /* Dimensiones */
+    --content-max: 1200px;
+    --gutter: 24px;
+    --radius: 0px;      /* bordes rectos */
+    --shadow-sm: 0 1px 8px rgba(0,0,0,.45);
+    --shadow-md: 0 10px 24px rgba(0,0,0,.5);
+
+    /* Velocidades */
+    --t-fast: .15s;
+    --t-med:  .25s;
+    --t-slow: .45s;
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+html, body {
+    height: 100%;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.45;
+    color: var(--text-color);
+    background: var(--secondary-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img{ max-width: 100%; height: auto; display: block; }
+a{ color: #d6d6ff; text-decoration: none; }
+a:hover{ text-decoration: underline; }
+hr{ border: 0; border-top: 1px solid var(--border); margin: 20px 0; }
+
+/* Títulos */
+h1,h2,h3{
+    font-weight: 700;
+    letter-spacing: .3px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,.6);
+}
+h1{ font-size: 28px; }
+h2{ font-size: 22px; }
+h3{ font-size: 18px; }
+
+/* Contenedor genérico centrado */
+.container{
+    width: min(var(--content-max), 96%);
+    margin: 0 auto;
+}
+
+/* Borde blanco recto + sombra roja sutil */
+.panel{
+    border: 1px solid var(--border);
+    box-shadow: 1px 1px 6px var(--glow-red);
+    background: var(--secondary-color);
+}
+
+/* =========================================================
+   HEADER + NAV
+   ========================================================= */
+header {
+    position: sticky;
+    height: 150px;
+    background-color: var(--secondary-color);
+    background-image: url("images/fibraCarbonoBanner.jpg");
+    border-bottom: 1px solid white;
+    display: flex;
+    justify-content: center;
+}
+
+header h1 {
+    position: absolute;
+    top: 25px;
+    text-shadow: 1px 1px 3px red;
+}
+
+header nav {
+    position: absolute;
+    width: 100%;
+    height: 40%;
+    bottom: 0;
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid white;
+
+}
+
+header nav ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    list-style: none;
+}
+
+header nav ul li {
+    border: 1px solid white;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 6px;
+    box-shadow: 1px 1px 4px red;
+    transition: background-color 1s ease-in-out, transform 0.6s ease-in-out, box-shadow 0.6s ease-in-out;
+}
+
+header nav ul li:hover {
+    background-color: #333;
+    transform: scale(1.1);
+    transition: 0.5s;
+    box-shadow: 2px 2px 4px rgb(255, 119, 0);
+}
+
+header nav ul li a {
+    padding: 5px;
+    text-decoration: none;
+    color: aliceblue;
+}
+
+
+/* =========================================================
+   LAYOUT: BUSCAR + RESULTADOS + EDICIÓN
+   ========================================================= */
+.buscar-modificar{
+    width: min(var(--content-max), 96%);
+    margin: 36px auto 28px;
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 32px;
+    align-items: start;
+}
+
+/* Columna izquierda: buscador */
+.buscar{
+    padding: 22px 20px;
+}
+.buscar.panel{}
+
+/* Título pequeño apretado */
+.buscar h2{
+    margin: 0 0 18px;
+}
+
+/* Form en dos columnas: label | input */
+.buscar .formulario form{
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 12px 14px;
+}
+.buscar .formulario form p{
+    display: contents;
+}
+.buscar label{
+    align-self: center;
+    color: #f1f1f1;
+}
+.buscar input[type="search"],
+.buscar select{
+    background: #1e1e1e;
+    color: #fff;
+    border: 1px solid #666;
+    padding: 10px 12px;
+    outline: none;
+    transition: border var(--t-fast) ease, box-shadow var(--t-fast) ease;
+}
+.buscar input[type="search"]:focus,
+.buscar select:focus{
+    border-color: var(--warning);
+    box-shadow: 0 0 0 3px rgba(255,119,0,.18);
+}
+
+.btn-buscar{
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 6px;
+}
+
+/* Columna derecha: resultados (tabla) */
+#ver-empleados{
+    padding: 16px 16px 24px;
+}
+#ver-empleados h2{
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.tabla-empleados{
+    display: flex;
+    justify-content: center;
+}
+
+/* Contenedor de edición bajo todo */
+.empleado-seleccionado{
+    width: min(var(--content-max), 96%);
+    margin: 12px auto 48px;
+    padding: 20px 22px;
+}
+
+/* =========================================================
+   TABLAS
+   ========================================================= */
+table{
+    width: min(920px, 100%);
+    border-collapse: collapse;
+    margin: 12px auto 0;
+    box-shadow: var(--shadow-sm);
+    background: #1b1b1b;
+}
+
+thead th{
+    background: #2b2b2b;
+    color: #fff;
+    border: 1px solid #ddd;
+    padding: 12px 10px;
+    text-align: left;
+    font-weight: 700;
+}
+tbody td{
+    border: 1px solid #ddd;
+    padding: 12px 10px;
+    color: #eaeaea;
+}
+
+tbody tr:nth-child(odd){
+    background: #202020;
+}
+tbody tr:nth-child(even){
+    background: #191919;
+}
+
+/* Hover de fila */
+tbody tr:hover{
+    background: #2a2a2a;
+    color: #fff;
+    transition: background var(--t-med) ease, color var(--t-med) ease;
+}
+
+/* Celda de acciones (botón Modificar) */
+td .action,
+td form button{
+    padding: 6px 10px;
+    background: var(--primary-color);
+    color: #fff;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    box-shadow: 1px 1px 4px var(--glow-red);
+    transition: transform var(--t-fast) ease, box-shadow var(--t-med) ease, background var(--t-med) ease;
+}
+td form button:hover{
+    background: #101010;
+    transform: translateY(-1px);
+    box-shadow: 2px 2px 6px var(--glow-orange);
+}
+
+/* Mensaje sin datos */
+.sin-empleados{
+    color: var(--danger);
+    text-align: center;
+    margin: 12px 0 6px;
+}
+
+/* Volver / Modificar links tipo botón */
+.volver, .modificar{
+    display: inline-block;
+    margin: 18px auto 0;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    background: var(--secondary-color);
+    box-shadow: 1px 1px 4px rgba(13,0,255,.4);
+    transition: transform var(--t-fast) ease, box-shadow var(--t-med) ease, background var(--t-med) ease;
+}
+#ver-empleados a{ color: #fff; }
+.volver:hover,
+.modificar:hover{
+    background: var(--primary-color);
+    transform: translateY(-1px);
+    box-shadow: 1px 1px 6px var(--glow-blue);
+}
+
+/* =========================================================
+   FORMULARIOS (Edición empleado / Consultar salario)
+   ========================================================= */
+#consultar-salario.card{
+    width: min(760px, 96%);
+    margin: 36px auto 28px;
+    padding: 24px 24px;
+    transition: background var(--t-slow) ease, transform var(--t-med) ease, box-shadow var(--t-med) ease;
+}
+#consultar-salario.card:hover{
+    background: #2b2b2b;
+    transform: scale(1.001);
+    box-shadow: 2px 2px 6px var(--glow-orange);
+}
+#consultar-salario h2{ margin-bottom: 18px; }
+
+/* Rejilla */
+.form-grid{
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 14px 16px;
+}
+.form-row{
+    display: contents;
+}
+.form-row label{
+    align-self: center;
+    font-weight: 600;
+}
+
+.input{
+    padding: 10px 12px;
+    border: 1px solid #666;
+    background: #1e1e1e;
+    color: #fff;
+    outline: none;
+    text-transform: uppercase;
+    transition: border var(--t-fast) ease, box-shadow var(--t-fast) ease;
+}
+.input:focus{
+    border-color: var(--warning);
+    box-shadow: 0 0 0 3px rgba(255,119,0,.18);
+}
+.input.readonly{
+    background: #2a2a2a;
+    color: #ddd;
+}
+.help{
+    grid-column: 2 / 3;
+    color: #bbb;
+    font-size: .85rem;
+    margin-top: 4px;
+}
+
+/* Acciones form */
+.form-actions{
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+/* Errores y avisos */
+.errors{
+    margin: 12px 0 0;
+    padding-left: 18px;
+    color: #ff6aa0;
+}
+.notice{
+    margin-top: 10px;
+    color: #ffbb66;
+}
+
+/* --------- Edición en la misma página --------- */
+.empleado-seleccionado h2{
+    text-align: center;
+    margin: 4px 0 16px;
+}
+.empleado-seleccionado .inputs{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 18px;
+}
+.empleado-seleccionado .inputs p{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.empleado-seleccionado label{
+    font-weight: 600;
+}
+
+/* Campos edición */
+.empleado-seleccionado input[type="text"],
+.empleado-seleccionado input[type="number"],
+.empleado-seleccionado select{
+    background: #1e1e1e;
+    color: #fff;
+    border: 1px solid #666;
+    padding: 10px 12px;
+    outline: none;
+    transition: border var(--t-fast) ease, box-shadow var(--t-fast) ease, background var(--t-med) ease;
+}
+.empleado-seleccionado input[type="text"]:focus,
+.empleado-seleccionado input[type="number"]:focus,
+.empleado-seleccionado select:focus{
+    border-color: var(--warning);
+    box-shadow: 0 0 0 3px rgba(255,119,0,.18);
+}
+.empleado-seleccionado input[readonly]{
+    background: #2a2a2a; color: #ddd;
+}
+
+/* Barra de botones de edición */
+.empleado-seleccionado .form-actions{
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+/* =========================================================
+   BOTONES GENÉRICOS
+   ========================================================= */
+.btn,
+button{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    background: var(--primary-color);
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform var(--t-fast) ease, box-shadow var(--t-med) ease, background var(--t-med) ease;
+    box-shadow: 1px 1px 4px var(--glow-red);
+}
+.btn:hover,
+button:hover{
+    background: #101010;
+    transform: translateY(-1px);
+    box-shadow: 2px 2px 6px var(--glow-orange);
+}
+.btn:active,
+button:active{
+    transform: translateY(0);
+    box-shadow: 1px 1px 4px var(--glow-red);
+}
+
+.btn-secondary{
+    background: #2a2a2a;
+}
+.btn-secondary:hover{
+    background: #202020;
+}
+
+/* Estados */
+.is-ok{ color: var(--ok); }
+.is-warn{ color: var(--warning); }
+.is-bad{ color: var(--danger); }
+
+/* =========================================================
+   UTILIDADES
+   ========================================================= */
+.center{ text-align: center; }
+.right{ text-align: right; }
+.mt-0{ margin-top: 0; } .mt-8{ margin-top: 8px; } .mt-16{ margin-top: 16px; } .mt-24{ margin-top: 24px; }
+.mb-0{ margin-bottom: 0; } .mb-8{ margin-bottom: 8px; } .mb-16{ margin-bottom: 16px; } .mb-24{ margin-bottom: 24px; }
+.px-16{ padding-left: 16px; padding-right: 16px; }
+.hidden{ display: none !important; }
+
+/* Paneles estándar (aplícalos con .panel) */
+header.panel,
+.buscar.panel,
+#ver-empleados.panel,
+.empleado-seleccionado.panel,
+#consultar-salario.card.panel{
+    border: 1px solid var(--border);
+    box-shadow: 1px 1px 6px var(--glow-red);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 1080px){
+    .buscar-modificar{
+        grid-template-columns: 1fr 1.4fr;
+    }
+}
+
+@media (max-width: 920px){
+    .buscar-modificar{
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    .buscar .formulario form{
+        grid-template-columns: 140px 1fr;
+    }
+    .empleado-seleccionado .inputs{
+        grid-template-columns: 1fr;
+    }
+    table{ width: 100%; }
+}
+
+@media (max-width: 640px){
+    header{ height: 130px; }
+    header h1{ font-size: 22px; top: 18px; }
+    .nav{ flex-wrap: wrap; gap: 10px; }
+    .nav a{ padding: 6px 10px; }
+    .buscar .formulario form{
+        grid-template-columns: 1fr;
+    }
+    .buscar label{ margin-bottom: -6px; }
+    .form-grid{ grid-template-columns: 1fr; }
+    .help{ grid-column: 1 / -1; }
+}

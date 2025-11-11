@@ -1,19 +1,19 @@
 package com.antonio.dao;
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.antonio.conexion.DataBaseConnection;
 import com.antonio.excepciones.EmpleadoDataException;
 import com.antonio.excepciones.FormatoDniException;
 import com.antonio.excepciones.FormatoSexoException;
 import com.antonio.laboral.Nomina;
 import com.antonio.model.EmpleadoModelo;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class EmpleadoDAO {
@@ -223,7 +223,7 @@ public class EmpleadoDAO {
         List<EmpleadoModelo> listaEmpleados = new ArrayList<>();
 
         try (Connection conn = DataBaseConnection.getConnection();
-        PreparedStatement pstmt = conn.prepareStatement(consulta);) {
+             PreparedStatement pstmt = conn.prepareStatement(consulta);) {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {

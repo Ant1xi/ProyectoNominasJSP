@@ -10,71 +10,71 @@ import com.antonio.excepciones.NominaDataException;
 
 public class NominaModelo {
 
-	private Integer idNomina;
-	private String dni;
-	private Double sueldo;
+    private Integer idNomina;
+    private String dni;
+    private Double sueldo;
 
-	public NominaModelo(Integer idNomina, String dni, Double sueldo) throws NominaDataException, FormatoDniException {
+    public NominaModelo(Integer idNomina, String dni, Double sueldo) throws NominaDataException, FormatoDniException {
 
-		if (idNomina == null) {
-			throw new NominaDataException("La id de la Nómina no puede ser nula");
-		}
+        if (idNomina == null) {
+            throw new NominaDataException("La id de la Nómina no puede ser nula");
+        }
 
-		comprobarDni(dni);
-		comprobarSueldo(sueldo);
+        comprobarDni(dni);
+        comprobarSueldo(sueldo);
 
-		this.idNomina = idNomina;
-		this.dni = dni;
-		this.sueldo = sueldo;
-	}
+        this.idNomina = idNomina;
+        this.dni = dni;
+        this.sueldo = sueldo;
+    }
 
-	public NominaModelo(String dni, Double sueldo) throws FormatoDniException, NominaDataException {
-		
-		comprobarDni(dni);
-		comprobarSueldo(sueldo);
-		
-		this.dni = dni;
-		this.sueldo = sueldo;
-	}
+    public NominaModelo(String dni, Double sueldo) throws FormatoDniException, NominaDataException {
 
-	public Integer getIdNomina() {
-		return idNomina;
-	}
+        comprobarDni(dni);
+        comprobarSueldo(sueldo);
 
-	public String getDni() {
-		return dni;
-	}
+        this.dni = dni;
+        this.sueldo = sueldo;
+    }
 
-	public Double getSueldo() {
-		return sueldo;
-	}
+    public Integer getIdNomina() {
+        return idNomina;
+    }
 
-	@Override
-	public String toString() {
-		return "NominaModelo [idNomina=" + idNomina + ", dni=" + dni + ", sueldo=" + sueldo + "]";
-	}
+    public String getDni() {
+        return dni;
+    }
 
-	public void comprobarDni(String dni) throws FormatoDniException {
+    public Double getSueldo() {
+        return sueldo;
+    }
 
-		if (dni == null || dni.isBlank()) {
-			throw new FormatoDniException("El DNI es obligatorio");
-		}
+    @Override
+    public String toString() {
+        return "NominaModelo [idNomina=" + idNomina + ", dni=" + dni + ", sueldo=" + sueldo + "]";
+    }
 
-		if (!dni.matches("^\\d{8}[A-Z]$")) {
-			throw new FormatoDniException(
-					"Formato del DNI incorrecto: Deben ser 8 números seguidos de una letra en mayúscula");
-		}
+    public void comprobarDni(String dni) throws FormatoDniException {
 
-	}
+        if (dni == null || dni.isBlank()) {
+            throw new FormatoDniException("El DNI es obligatorio");
+        }
 
-	public void comprobarSueldo(Double sueldo) throws NominaDataException {
+        if (!dni.matches("^\\d{8}[A-Z]$")) {
+            throw new FormatoDniException(
+                    "Formato del DNI incorrecto: Deben ser 8 números seguidos de una letra en mayúscula");
+        }
 
-		if (sueldo == null) {
-			throw new NominaDataException("El sueldo no puede ser un valor nulo.");
-		}
+    }
 
-		if (sueldo < 0) {
-			throw new NominaDataException("El sueldo no puede ser un valor negativo.");
-		}
-	}
+    public void comprobarSueldo(Double sueldo) throws NominaDataException {
+
+        if (sueldo == null) {
+            throw new NominaDataException("El sueldo no puede ser un valor nulo.");
+        }
+
+        if (sueldo < 0) {
+            throw new NominaDataException("El sueldo no puede ser un valor negativo.");
+        }
+    }
 }

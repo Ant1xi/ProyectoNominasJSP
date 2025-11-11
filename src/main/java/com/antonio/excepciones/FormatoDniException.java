@@ -6,19 +6,21 @@ package com.antonio.excepciones;
  */
 public class FormatoDniException extends AppException {
 
-	private static final long serialVersionUID = -5922904352365931716L;
+    private static final long serialVersionUID = -5922904352365931716L;
 
-	/** Crea la excepción sin mensaje. */
-	public FormatoDniException() {
-		super();
-	}
+    /**
+     * Crea la excepción sin mensaje.
+     */
+    public FormatoDniException() {
+        super();
+    }
 
-	/**
-	 * Crea la excepción con un mensaje descriptivo.
-	 *
-	 * @param message descripción del error
-	 */
-	public FormatoDniException(String message) {
-		super(message);
-	}
+    /**
+     * Crea la excepción con un mensaje descriptivo.
+     *
+     * @param message descripción del error
+     */
+    public FormatoDniException(String message) {
+        super(message);
+    }
 }

@@ -1,9 +1,12 @@
 package com.antonio.conexion;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public final class DataBaseConnection {
-    private static final String URL  = "jdbc:mariadb://localhost:3306/gestor_nominas";
+    private static final String URL = "jdbc:mariadb://localhost:3306/gestor_nominas";
     private static final String USER = "nominas_user";
     private static final String PASSWORD = "1234";
 
@@ -26,7 +29,8 @@ public final class DataBaseConnection {
         }
     }
 
-    private DataBaseConnection() {}
+    private DataBaseConnection() {
+    }
 
     public static Connection getConnection() throws SQLException {
         System.out.println("[DB] Abriendo conexión a " + URL);

@@ -1,13 +1,13 @@
 package com.antonio.dao;
 
+import com.antonio.conexion.DataBaseConnection;
+import com.antonio.laboral.Nomina;
+import com.antonio.model.EmpleadoModelo;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import com.antonio.conexion.DataBaseConnection;
-import com.antonio.laboral.Nomina;
-import com.antonio.model.EmpleadoModelo;
 
 public class NominaDAO {
 
@@ -85,7 +85,6 @@ public class NominaDAO {
             return null;
         }
     }
-
 
 
 }
